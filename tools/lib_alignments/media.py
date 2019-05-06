@@ -341,7 +341,7 @@ class ExtractedFaces():
     @staticmethod
     def save_face_with_hash(filename, extension, face):
         """ Save a face and return it's hash """
-        f_hash, img = hash_encode_image(face, extension)
+        f_hash, img = hash_encode_image(face, extension, filename)
         logger.trace("Saving face: '%s'", filename)
         with open(filename, "wb") as out_file:
             out_file.write(img)

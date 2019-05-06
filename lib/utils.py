@@ -61,18 +61,16 @@ def get_image_paths(directory):
 
 def hash_image_file(filename):
     """ Return an image file's sha1 hash """
-    img = cv2.imread(filename)  # pylint: disable=no-member
-    img_hash = sha1(img).hexdigest()
+    img_hash = sha1(filename.encode("utf-8")).hexdigest()
     logger.trace("filename: '%s', hash: %s", filename, img_hash)
     return img_hash
 
 
-def hash_encode_image(image, extension):
+def hash_encode_image(image, extension, filename):
     """ Encode the image, get the hash and return the hash with
         encoded image """
     img = cv2.imencode(extension, image)[1]  # pylint: disable=no-member
-    f_hash = sha1(
-        cv2.imdecode(img, cv2.IMREAD_UNCHANGED)).hexdigest()  # pylint: disable=no-member
+    f_hash = sha1(filename.encode("utf-8")).hexdigest()  # pylint: disable=no-member
     return f_hash, img
 
 
