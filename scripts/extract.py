@@ -243,7 +243,8 @@ class Extract():
         for idx, detected_face in enumerate(faces["detected_faces"]):
             output_file = detected_face["file_location"]
             extension = Path(filename).suffix
-            out_filename = "{}_{}{}".format(str(output_file), str(idx), extension)
+            # todo 只存单脸
+            out_filename = "{}{}".format(str(output_file), extension)
 
             face = detected_face["face"]
             resized_face = face.aligned_face

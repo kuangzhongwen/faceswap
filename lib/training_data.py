@@ -209,12 +209,8 @@ class TrainingDataGenerator():
         fn_splits = filename.split('/')
         # 获取到文件名
         st_fn = fn_splits[len(fn_splits) - 1]
-        # 此处需要与客户端保持一致，目前后台生成的文件名是带 _0 的，所以这边需要去除结尾的 _0，如客户端无此规则，hash 时直接传入 st_fn 即可
-        st_fn_splits = st_fn.split('.')
-        left_len = len(st_fn_splits[0])
-        st_fn_process = "%s.%s" % (st_fn_splits[0][0:left_len - 2], st_fn_splits[1])
-        print ("get landmarks short filename: ", st_fn_process)
-        lm_key = sha1(st_fn_process.encode("utf-8")).hexdigest()
+        print ("get landmarks short filename: ", st_fn)
+        lm_key = sha1(st_fn.encode("utf-8")).hexdigest()
         print ("get landmarks lm key: ", lm_key)
         try:
             src_points = self.landmarks[side][lm_key]
